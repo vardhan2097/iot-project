@@ -10,17 +10,12 @@ class ModuleController extends Controller
 {
     public function index()
     {
-        $modules = Module::with(['readings' => function ($query)
-        {
-            $query->orderBy('timestamp', 'desc')->limit(1);
-        }])->get();
-
+        $modules = Module::with('readings')->get();
         return view('dashboard', compact('modules'));
     }
 
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => 'required|string|max:255',
             'type' => 'required|string|max:50',
@@ -37,16 +32,23 @@ class ModuleController extends Controller
 
     public function fetchModules()
     {
-        $modules = Module::with(['readings' => function ($query) {
-            $query->orderBy('timestamp', 'desc')->limit(1);
-        }])->get();
-
+        $modules = Module::with('readings')->get();
         return response()->json($modules);
     }
 
     public function create()
     {
         return view('Modules.Create');
+    }
+
+    public function chart()
+    {
+        $modules = Module::with(['readings' => function ($query) {
+            $query->latest()->take(20)->orderBy('timestamp', 'desc');
+        }])->get();
+
+        // dd($modules);
+        return view('Modules.Chart', compact('modules'));
     }
 
 }

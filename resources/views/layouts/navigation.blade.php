@@ -1,26 +1,35 @@
-<nav class="bg-white border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <h3 class="text-xl font-bold">IOT Dashboard</h3>
-                    </a>
-                </div>
-            </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
+    <div class="container">
+        <!-- Brand -->
+        <a class="navbar-brand fw-bold" href="{{ route('dashboard') }}">IOT Dashboard</a>
 
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+        <!-- Navbar Toggler (for mobile view) -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Items -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
                 @auth
-                    <span class="mr-4 text-gray-700">Welcome, {{ Auth::user()->name }}</span>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        &nbsp;&nbsp;&nbsp;<button type="submit" class="text-red-500 hover:underline">Logout</button>
-                    </form>
+                    <li class="nav-item">
+                        <span class="nav-link">Welcome, <strong>{{ Auth::user()->name }}</strong></span>
+                    </li>
+                    <li class="nav-item">
+                        <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
+                        </form>
+                    </li>
                 @else
-                    <a href="{{ route('login') }}" class="text-gray-500 hover:text-gray-700 mr-4">Login</a>
-                    <a href="{{ route('register') }}" class="text-gray-500 hover:text-gray-700">Register</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">Register</a>
+                    </li>
                 @endauth
-            </div>
+            </ul>
         </div>
     </div>
 </nav>

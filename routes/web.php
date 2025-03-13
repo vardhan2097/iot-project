@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/api/modules', [ModuleController::class, 'fetchModules']);
     Route::get('/modules/create', [ModuleController::class, 'create'])->name('modules.create');
     Route::post('/modules/store', [ModuleController::class, 'store'])->name('modules.store');
+    Route::get('/modules/chart', [ModuleController::class, 'chart'])->name('modules.chart');
 
     Route::get('/dashboard', [ModuleController::class, 'index'])->name('dashboard');
 
