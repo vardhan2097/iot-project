@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class ModuleReading extends Model
 {
     use HasFactory;
-    protected $fillable = ['module_id', 'measured_value'];
+    protected $fillable = ['module_id', 'measured_value', 'status', 'timestamp'];
 
+    public function module()
+    {
+        return $this->belongsTo(Module::class);
+    }
 }

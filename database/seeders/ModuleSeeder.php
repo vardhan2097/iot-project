@@ -13,7 +13,8 @@ class ModuleSeeder extends Seeder
      */
     public function run(): void
     {
-        Module::create(['name' => 'Temperature Sensor 1', 'type' => 'Temperature']);
-        Module::create(['name' => 'Speed Sensor 1', 'type' => 'Speed']);
+        Module::create(['name' => 'Temperature Sensor 1', 'type' => 'Temperature', 'status' => 'Active']);
+        Module::create(['name' => 'Speed Sensor 1', 'type' => 'Speed', 'status' => 'Active']);
+        Module::create(['name' => 'Pressure Sensor', 'type' => 'Pressure', 'status' => 'Active']);
     }
 }

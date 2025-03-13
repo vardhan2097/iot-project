@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('type');
-            $table->boolean('status')->default(true);
+            $table->string('type', 50);
+            $table->enum('status', ['Active', 'Inactive', 'Malfunction'])->default('Active');
             $table->timestamps();
         });
     }
@@ -25,6 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+
         Schema::dropIfExists('modules');
     }
 };

@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->command('simulate:module-data')->everyMinute();
+        $schedule->command('simulate:modules')->everyMinute();
     }
 
     /**

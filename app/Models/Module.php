@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Module extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'type', 'status'];
 
     public function readings()
     {
-        return $this->hasMany(ModuleReading::class, 'module_id');
+        return $this->hasMany(ModuleReading::class);
     }
 }

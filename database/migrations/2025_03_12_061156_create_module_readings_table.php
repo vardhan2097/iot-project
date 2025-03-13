@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('module_readings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('module_id')->constrained('modules')->onDelete('cascade');
+            $table->foreignId('module_id')->constrained()->onDelete('cascade');
             $table->float('measured_value');
-            $table->timestamp('recorded_at')->useCurrent();
+            $table->enum('status', ['Active', 'Inactive', 'Malfunction'])->default('Active');
+            $table->timestamp('timestamp')->useCurrent();
             $table->timestamps();
         });
     }

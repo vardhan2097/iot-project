@@ -13,14 +13,14 @@ class SimulateModuleData extends Command
      *
      * @var string
      */
-    protected $signature = 'simulate:module-data';
+    protected $signature = 'simulate:modules';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Simulate module data';
+    protected $description = 'Simulate Module Data';
 
     /**
      * Execute the console command.
@@ -28,23 +28,19 @@ class SimulateModuleData extends Command
     public function handle()
     {
         $modules = Module::all();
-
         foreach($modules as $module)
         {
-            if(rand(1,100) > 90)
-            {
-                $module->status = !$module->status;
-                $module->save();
-            }
+            $status = (rand(0, 10) > 8) ? 'Malfunction' : 'Active';
+            $value = rand(20, 100);
 
-            if($module->status)
-            {
-                ModuleReading::create([
-                    'module_id' => $module->id,
-                    'measured_value' => rand(20,100)/10,
-                ]);
-            }
+            $module->update(['status' => $status]);
+
+            ModuleReading::create([
+                'module_id' => $module->id,
+                'measured_value' => $value,
+                'status' => $status,
+            ]);
         }
-        $this->info('Module data simulated.');
+        $this->info('Module readings generated successfully!');
     }
 }
