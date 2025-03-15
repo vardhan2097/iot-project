@@ -10,7 +10,9 @@ class ModuleController extends Controller
 {
     public function index()
     {
-        $modules = Module::with('readings')->get();
+        $modules = Module::with(['readings' => function ($query) {
+            $query->latest('timestamp');
+        }])->get();
         return view('dashboard', compact('modules'));
     }
 
@@ -32,7 +34,9 @@ class ModuleController extends Controller
 
     public function fetchModules()
     {
-        $modules = Module::with('readings')->get();
+        $modules = Module::with(['readings' => function ($query) {
+            $query->latest('timestamp');
+        }])->get();
         return response()->json($modules);
     }
 
